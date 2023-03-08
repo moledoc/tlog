@@ -44,6 +44,7 @@ func TestConcurrency(t *testing.T) {
 		go func() {
 			defer wg.Done()
 			tlog.Log(t, l)
+			// tlog.LogPrint(t,l)
 		}()
 		// notExpected += l
 	}
