@@ -1,0 +1,3 @@
+2023-03-12 20:20:00 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:107 [TestFailMultiMix]: "one"
+2023-03-12 20:20:00 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:108 [TestFailMultiMix]: "one" "two"
+2023-03-12 20:20:00 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:109 [TestFailMultiMix]: 	one,two,three

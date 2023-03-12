@@ -52,14 +52,15 @@ func makeEntry(t *testing.T, format string, args ...any) *Entry {
 	}
 }
 
-// logger is an active logging object that stores log entries and outputs them to an io.Writer, when test fails or panics.
-// logger can be used simultaneously from multiple goroutines; it guarantees to serialize log entries to an internal cache.
-type logger struct {
+// Logger is an active logging object that stores log entries and outputs them to an io.Writer, when test fails or panics.
+// Logger can be used simultaneously from multiple goroutines; it guarantees to serialize log entries to an internal cache.
+type Logger struct {
 	// filtered and unexported fields
-	t        *testing.T
-	writesTo io.Writer
-	logs     []*Entry
-	mu       sync.RWMutex
+	t            *testing.T
+	writesTo     io.Writer
+	logs         []*Entry
+	mu           sync.RWMutex
+	cleanupFuncs []func()
 }
 
 // lnFormat creates a format string with `count` number of values.
@@ -76,19 +77,22 @@ func lnFormat(count int) string {
 }
 
 // createLogger makes a new logger and makes sure that log entries are outputted when the test failed or paniced.
-func createLogger(t *testing.T, wt io.Writer) *logger {
+func createLogger(t *testing.T, wt io.Writer) *Logger {
 	t.Helper()
-	sl := &logger{writesTo: wt, t: t}
+	sl := &Logger{writesTo: wt, t: t}
 	t.Cleanup(func() {
 		if recover() == nil || t.Failed() {
 			sl.print()
+		}
+		for _, fn := range sl.cleanupFuncs {
+			fn()
 		}
 	})
 	return sl
 }
 
 // print outputs the log entries of the logger to io.Writer specified in the logger object.
-func (sl *logger) print() {
+func (sl *Logger) print() {
 	sl.t.Helper()
 	sl.mu.Lock()
 	defer sl.mu.Unlock()
@@ -99,27 +103,34 @@ func (sl *logger) print() {
 }
 
 // WritesTo sets the loggers io.Writer to the specified one.
-func (sl *logger) WritesTo(wt io.Writer) {
+func (sl *Logger) WritesTo(wt io.Writer) {
 	sl.mu.Lock()
 	defer sl.mu.Unlock()
 	sl.writesTo = wt
 }
 
 // NewWithWriter creates a new logger with provided io.Writer.
-func NewWithWriter(t *testing.T, wt io.Writer) *logger {
+func NewWithWriter(t *testing.T, wt io.Writer) *Logger {
 	return createLogger(t, wt)
 }
 
 // New creates a new logger with os.Stdout as the io.Writer.
-func New(t *testing.T) *logger {
+func New(t *testing.T) *Logger {
 	return NewWithWriter(t, os.Stdout)
 
+}
+
+// AddCleanupFunc adds function to list of functions to be run during the cleanup.
+func (sl *Logger) AddCleanupFunc(fn func()) {
+	sl.mu.Lock()
+	defer sl.mu.Unlock()
+	sl.cleanupFuncs = append(sl.cleanupFuncs, fn)
 }
 
 // Logf formats its arguments according to the format, analogous to fmt.Printf, and records the text in a new log entry.
 // A final newline is added if not provided.
 // The entry is only outputted when the test fails or panics.
-func (sl *logger) Logf(format string, args ...any) {
+func (sl *Logger) Logf(format string, args ...any) {
 	sl.t.Helper()
 	sl.mu.Lock()
 	defer sl.mu.Unlock()
@@ -128,14 +139,14 @@ func (sl *logger) Logf(format string, args ...any) {
 
 // Log formats its arguments in a default format, analogous to fmt.Println and records the text in a new log entry.
 // The entry is only outputted when the test fails or panics.
-func (sl *logger) Log(args ...any) {
+func (sl *Logger) Log(args ...any) {
 	sl.t.Helper()
 	sl.Logf(lnFormat(len(args)), args...)
 }
 
 // Printf formats its arguments according to the format, analogous to Printf, creates a log entry and outputs it to io.Writer specified in the logger.
 // It returns the number of bytes written and any write error.
-func (sl *logger) Printf(format string, args ...any) (int, error) {
+func (sl *Logger) Printf(format string, args ...any) (int, error) {
 	sl.t.Helper()
 	sl.mu.RLock()
 	wt := sl.writesTo
@@ -145,7 +156,7 @@ func (sl *logger) Printf(format string, args ...any) (int, error) {
 
 // Printf formats its arguments according to the format, analogous to Printf, creates a log entry and outputs it to io.Writer specified in the arguments.
 // It returns the number of bytes written and any write error.
-func (sl *logger) PrintfTo(wt io.Writer, format string, args ...any) (int, error) {
+func (sl *Logger) PrintfTo(wt io.Writer, format string, args ...any) (int, error) {
 	sl.t.Helper()
 	sl.mu.RLock()
 	defer sl.mu.RUnlock()
@@ -154,7 +165,7 @@ func (sl *logger) PrintfTo(wt io.Writer, format string, args ...any) (int, error
 
 // Println formats its arguments according to the format, analogous to Println, creates a log entry and outputs it to io.Writer specified in the logger.
 // It returns the number of bytes written and any write error.
-func (sl *logger) Println(args ...any) (int, error) {
+func (sl *Logger) Println(args ...any) (int, error) {
 	sl.t.Helper()
 	sl.mu.RLock()
 	defer sl.mu.RUnlock()
@@ -163,12 +174,12 @@ func (sl *logger) Println(args ...any) (int, error) {
 
 // PrintlnTo formats its arguments according to the format, analogous to Println, creates a log entry and outputs it to io.Writer specified in the arguments.
 // It returns the number of bytes written and any write error.
-func (sl *logger) PrintlnTo(wt io.Writer, format string, args ...any) (int, error) {
+func (sl *Logger) PrintlnTo(wt io.Writer, format string, args ...any) (int, error) {
 	sl.t.Helper()
 	return sl.PrintfTo(wt, lnFormat(len(args)), args...)
 }
 
 // GetLogEntries returns list of log entries recorded in the logger.
-func (sl *logger) GetLogEntriess() []*Entry {
+func (sl *Logger) GetLogEntries() []*Entry {
 	return sl.logs
 }
