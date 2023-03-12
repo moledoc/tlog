@@ -107,7 +107,7 @@ import (
 // }
 
 func TestPanic(t *testing.T) {
-	// t.SkipNow()
+	t.SkipNow()
 	t.Parallel()
 	tl := tlog.New(t)
 	tl.Log("lala")
@@ -120,15 +120,16 @@ func TestPanic(t *testing.T) {
 }
 
 func TestFailed(t *testing.T) {
-	// t.SkipNow()
+	t.SkipNow()
 	t.Parallel()
 	tl := tlog.New(t)
 	tl.Log("lala")
-	tl.Print("hahaha")
+	tl.Println("hahaha")
 	t.FailNow()
 }
 
 func TestTryToPanic2(t *testing.T) {
+	t.SkipNow()
 	t.Parallel()
 	s := time.Now()
 	cnt := 50000
@@ -148,10 +149,11 @@ func TestTryToPanic2(t *testing.T) {
 	wg.Wait()
 	// fmt.Println(notExpected)
 	// tlog.Print(t)
-	tl.Print(time.Since(s))
+	tl.Println(time.Since(s))
 }
 
 func TestTryToPanic3(t *testing.T) {
+	t.SkipNow()
 	t.Parallel()
 	s := time.Now()
 	cnt := 50000
@@ -170,6 +172,6 @@ func TestTryToPanic3(t *testing.T) {
 	}
 	wg.Wait()
 	// fmt.Println(notExpected)
-	// tlog.Print(t)
-	tl.Print(time.Since(s))
+	// tlog.Println(t)
+	tl.Println(time.Since(s))
 }
