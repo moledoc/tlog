@@ -77,35 +77,6 @@ import (
 // 	tlog.LogPrint(t,time.Since(s))
 // }
 
-func TestTryToPanic(t *testing.T) {
-	t.SkipNow()
-	t.Parallel()
-	s := time.Now()
-	cnt := 10000
-	// var bs []byte
-	// buf := bytes.NewBuffer(bs)
-	var wg sync.WaitGroup
-	// var notExpected string
-	for i := 0; i < cnt; i++ {
-		l := strconv.Itoa(i) + ","
-		wg.Add(1)
-		go func() {
-			defer wg.Done()
-			tlog.Log(t, l)
-			tlog.Log(t, l)
-			tlog.Log(t, l)
-			tlog.Log(t, l)
-			// tlog.Print(t, l)
-			// tlog.PrintTo(t, buf, l)
-			// tlog.PrintTo(t, buf)
-		}()
-	}
-	wg.Wait()
-	// fmt.Println(notExpected)
-	// tlog.Print(t)
-	tlog.Print(t, time.Since(s))
-}
-
 // func TestPerf(t *testing.T) {
 // 	t.Parallel()
 // 	s := time.Now()
@@ -134,6 +105,19 @@ func TestTryToPanic(t *testing.T) {
 // 	wg.Wait()
 // 	tlog.LogPrint(t,time.Since(s))
 // }
+
+func TestPanic(t *testing.T) {
+	// t.SkipNow()
+	t.Parallel()
+	tl := tlog.New(t)
+	tl.Log("lala")
+	defer func() {
+		if r := recover(); r == nil {
+			t.Fatal("Expected panic, but nobody paniced")
+		}
+	}()
+	panic(1)
+}
 
 func TestFailed(t *testing.T) {
 	// t.SkipNow()
@@ -187,5 +171,5 @@ func TestTryToPanic3(t *testing.T) {
 	wg.Wait()
 	// fmt.Println(notExpected)
 	// tlog.Print(t)
-	tlog.Print(t, time.Since(s))
+	tl.Print(time.Since(s))
 }

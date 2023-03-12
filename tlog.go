@@ -11,16 +11,16 @@ import (
 	"time"
 )
 
-// LOG
+// log
 
-type log struct {
+type logline struct {
 	time     time.Time
 	location string
 	testName string
 	msg      string
 }
 
-func logline(t *testing.T, format string, args ...any) *log {
+func log(t *testing.T, format string, args ...any) *logline {
 	t.Helper()
 	msg := fmt.Sprintf(format, args...)
 	var location string
@@ -31,7 +31,7 @@ func logline(t *testing.T, format string, args ...any) *log {
 			break
 		}
 	}
-	return &log{
+	return &logline{
 		time:     time.Now(),
 		location: location,
 		testName: t.Name(),
@@ -39,7 +39,7 @@ func logline(t *testing.T, format string, args ...any) *log {
 	}
 }
 
-func (l *log) String() string {
+func (l *logline) String() string {
 	return fmt.Sprintf(
 		"%v %v %v %v\n",
 		l.time.UTC().Format("2006-01-02 15:04:05"),
@@ -50,8 +50,8 @@ func (l *log) String() string {
 }
 
 // LOGGER
-type safelogs struct {
-	logs     []*log
+type logger struct {
+	logs     []*logline
 	writesTo io.Writer
 	mu       sync.RWMutex
 	t        *testing.T
@@ -67,28 +67,28 @@ func lnFormat(count int) string {
 	return strings.Join(s, " ")
 }
 
-func register(t *testing.T, wt io.Writer) *safelogs {
+func register(t *testing.T, wt io.Writer) *logger {
 	t.Helper()
-	sl := &safelogs{writesTo: wt, t: t}
+	sl := &logger{writesTo: wt, t: t}
 	t.Cleanup(func() {
-		if t.Failed() {
+		if recover() == nil || t.Failed() {
 			sl.print()
 		}
 	})
 	return sl
 }
 
-func (sl *safelogs) print() {
+func (sl *logger) print() {
 	sl.t.Helper()
 	sl.mu.Lock()
 	defer sl.mu.Unlock()
 	for _, log := range sl.logs {
 		fmt.Fprint(sl.writesTo, log)
 	}
-	sl.logs = []*log{}
+	sl.logs = []*logline{}
 }
 
-func (sl *safelogs) WritesTo(wt io.Writer) {
+func (sl *logger) WritesTo(wt io.Writer) {
 	sl.mu.Lock()
 	defer sl.mu.Unlock()
 	sl.writesTo = wt
@@ -96,33 +96,33 @@ func (sl *safelogs) WritesTo(wt io.Writer) {
 
 // NEW
 
-func NewWithWriter(t *testing.T, wt io.Writer) *safelogs {
+func NewWithWriter(t *testing.T, wt io.Writer) *logger {
 	return register(t, wt)
 
 }
 
-func New(t *testing.T) *safelogs {
+func New(t *testing.T) *logger {
 	return NewWithWriter(t, os.Stdout)
 
 }
 
 // LOGGERS
 
-func (sl *safelogs) Logf(format string, args ...any) {
+func (sl *logger) Logf(format string, args ...any) {
 	sl.t.Helper()
 	sl.mu.Lock()
 	defer sl.mu.Unlock()
-	sl.logs = append(sl.logs, logline(sl.t, format, args...))
+	sl.logs = append(sl.logs, log(sl.t, format, args...))
 }
 
-func (sl *safelogs) Log(args ...any) {
+func (sl *logger) Log(args ...any) {
 	sl.t.Helper()
 	sl.Logf(lnFormat(len(args)), args...)
 }
 
 // PRINTERS
 
-func (sl *safelogs) Printf(format string, args ...any) (int, error) {
+func (sl *logger) Printf(format string, args ...any) (int, error) {
 	sl.t.Helper()
 	sl.mu.RLock()
 	wt := sl.writesTo
@@ -130,21 +130,21 @@ func (sl *safelogs) Printf(format string, args ...any) (int, error) {
 	return sl.PrintfTo(wt, format, args...)
 }
 
-func (sl *safelogs) PrintfTo(wt io.Writer, format string, args ...any) (int, error) {
+func (sl *logger) PrintfTo(wt io.Writer, format string, args ...any) (int, error) {
 	sl.t.Helper()
 	sl.mu.RLock()
 	defer sl.mu.RUnlock()
-	return fmt.Fprint(wt, logline(sl.t, format, args...).String())
+	return fmt.Fprint(wt, log(sl.t, format, args...).String())
 }
 
-func (sl *safelogs) Print(args ...any) (int, error) {
+func (sl *logger) Print(args ...any) (int, error) {
 	sl.t.Helper()
 	sl.mu.RLock()
 	defer sl.mu.RUnlock()
 	return sl.PrintfTo(sl.writesTo, lnFormat(len(args)), args...)
 }
 
-func (sl *safelogs) PrintTo(wt io.Writer, format string, args ...any) (int, error) {
+func (sl *logger) PrintTo(wt io.Writer, format string, args ...any) (int, error) {
 	sl.t.Helper()
 	return sl.PrintfTo(wt, lnFormat(len(args)), args...)
 }
