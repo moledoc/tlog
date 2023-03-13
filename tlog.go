@@ -122,13 +122,14 @@ func New(t *testing.T) *Logger {
 }
 
 // AddCleanupFunc adds function to list of functions to be run during the cleanup.
+// Example usecase would be to add file.Close(), so that the file where logs are written is properly closed after the test ends.
 func (sl *Logger) AddCleanupFunc(fn func()) {
 	sl.mu.Lock()
 	defer sl.mu.Unlock()
 	sl.cleanupFuncs = append(sl.cleanupFuncs, fn)
 }
 
-// Logf formats its arguments according to the format, analogous to fmt.Printf, and records the text in a new log entry.
+// Logf formats its arguments according to the format, similarly to fmt.Printf, and records the text in a new log entry.
 // A final newline is added if not provided.
 // The entry is only outputted when the test fails or panics.
 func (sl *Logger) Logf(format string, args ...any) {
@@ -138,14 +139,16 @@ func (sl *Logger) Logf(format string, args ...any) {
 	sl.logs = append(sl.logs, makeEntry(sl.t, format, args...))
 }
 
-// Log formats its arguments in a default format, analogous to fmt.Println and records the text in a new log entry.
+// Log formats its arguments in a default format, similarly to fmt.Println and records the text in a new log entry.
 // The entry is only outputted when the test fails or panics.
+// NOTE: Using *Logger.Log outputs the provided message/objects as Go objects.
+// This is done so that struct fields are typed in the log. However, this also means that strings are logged as string literals.
 func (sl *Logger) Log(args ...any) {
 	sl.t.Helper()
 	sl.Logf(lnFormat(len(args)), args...)
 }
 
-// Printf formats its arguments according to the format, analogous to Printf, creates a log entry and outputs it to io.Writer specified in the logger.
+// Printf formats its arguments according to the format, similarly to Printf, creates a log entry and outputs it to io.Writer specified in the logger.
 // It returns the number of bytes written and any write error.
 func (sl *Logger) Printf(format string, args ...any) (int, error) {
 	sl.t.Helper()
@@ -155,7 +158,7 @@ func (sl *Logger) Printf(format string, args ...any) (int, error) {
 	return sl.PrintfTo(wt, format, args...)
 }
 
-// Printf formats its arguments according to the format, analogous to Printf, creates a log entry and outputs it to io.Writer specified in the arguments.
+// Printf formats its arguments according to the format, similarly to Printf, creates a log entry and outputs it to io.Writer specified in the arguments.
 // It returns the number of bytes written and any write error.
 func (sl *Logger) PrintfTo(wt io.Writer, format string, args ...any) (int, error) {
 	sl.t.Helper()
@@ -164,7 +167,7 @@ func (sl *Logger) PrintfTo(wt io.Writer, format string, args ...any) (int, error
 	return fmt.Fprint(wt, makeEntry(sl.t, format, args...).String())
 }
 
-// Println formats its arguments according to the format, analogous to Println, creates a log entry and outputs it to io.Writer specified in the logger.
+// Println formats its arguments according to the format, similarly to Println, creates a log entry and outputs it to io.Writer specified in the logger.
 // It returns the number of bytes written and any write error.
 func (sl *Logger) Println(args ...any) (int, error) {
 	sl.t.Helper()
@@ -173,7 +176,7 @@ func (sl *Logger) Println(args ...any) (int, error) {
 	return sl.PrintfTo(sl.writesTo, lnFormat(len(args)), args...)
 }
 
-// PrintlnTo formats its arguments according to the format, analogous to Println, creates a log entry and outputs it to io.Writer specified in the arguments.
+// PrintlnTo formats its arguments according to the format, similarly to Println, creates a log entry and outputs it to io.Writer specified in the arguments.
 // It returns the number of bytes written and any write error.
 func (sl *Logger) PrintlnTo(wt io.Writer, format string, args ...any) (int, error) {
 	sl.t.Helper()

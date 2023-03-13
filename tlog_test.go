@@ -62,7 +62,7 @@ func TestMain(m *testing.M) {
 	os.Exit(m.Run())
 }
 
-func getOutputFile() string {
+func getOutputFilename() string {
 	filename := actualTestResultsFilename
 	if record {
 		filename = expectedTestResultsFilename
@@ -72,7 +72,7 @@ func getOutputFile() string {
 
 func setupTestcase(t *testing.T) *tlog.Logger {
 	t.Helper()
-	filename := getOutputFile()
+	filename := getOutputFilename()
 
 	f, err := os.OpenFile(filename, os.O_WRONLY, 0750)
 	if err != nil {
@@ -82,6 +82,11 @@ func setupTestcase(t *testing.T) *tlog.Logger {
 	tl := tlog.NewWithWriter(t, f)
 	tl.AddCleanupFunc(func() { fmt.Printf("Closed file '%v' with err '%v'\n", f.Name(), f.Close()) })
 	return tl
+}
+
+func setupTestcaseStdout(t *testing.T) *tlog.Logger {
+	t.Helper()
+	return tlog.New(t)
 }
 
 func TestNoFail(t *testing.T) {
@@ -110,100 +115,37 @@ func TestFailMultiMix(t *testing.T) {
 	t.Fail()
 }
 
-// backup example
-// func TestXxx(t *testing.T) {
-// 	filename := actualTestResultsFilename
-// 	if record {
-// 		filename = expectedTestResultsFilename
-// 	}
+func TestPanic(t *testing.T) {
+	tl := setupTestcase(t)
+	tl.Log("panic at testco")
+	defer func() {
+		tl.SetPanic()
+		if r := recover(); r == nil {
+			t.Fatal("Expected panic, but nobody paniced")
+		}
 
-// 	f, err := os.OpenFile(filename, os.O_CREATE|os.O_RDWR, 0750)
-// 	if err != nil {
-// 		f, err = os.OpenFile(filename, os.O_CREATE|os.O_RDWR, 0750)
-// 		if err != nil {
-// 			t.Fatalf("unable to open file '%v'\n", filename)
-// 		}
-// 	}
+	}()
+	panic(1)
+}
 
-// 	tl := tlog.NewWithWriter(t, f)
-// 	tl.AddCleanup(func() { fmt.Println("CLOSED file: ", f.Close()) })
-// 	tl.Logf("%v", "one")
-// 	panic(1)
+func TestFailedTestcase(t *testing.T) {
+	tl := setupTestcase(t)
+	tl.Log("this testcase is a failure")
+	t.FailNow()
+}
 
-// 	tl.Logf("%v,%v", "one", "two")
-// 	tl.Logf("\t%v,%v,%v", "one", "two", "three")
-
-// 	t.Fail()
-// }
-
-// func TestPanic(t *testing.T) {
-// 	// t.SkipNow()
-// 	// t.Parallel()
-// 	os.Open("actual")
-// 	tl := tlog.NewWithWriter(t, os.Stdout)
-// 	tl.Log("I will panic")
-// 	defer func() {
-// 		if r := recover(); r == nil {
-// 			t.Fatal("Expected panic, but nobody paniced")
-// 		}
-
-// 	}()
-// 	panic(1)
-// }
-
-// func TestFailed(t *testing.T) {
-// 	t.SkipNow()
-// 	t.Parallel()
-// 	tl := tlog.New(t)
-// 	tl.Log("lala")
-// 	tl.Println("hahaha")
-// 	t.FailNow()
-// }
-
-// func TestTryToPanic2(t *testing.T) {
-// 	t.SkipNow()
-// 	t.Parallel()
-// 	s := time.Now()
-// 	cnt := 50000
-
-// 	tl := tlog.New(t)
-
-// 	var wg sync.WaitGroup
-// 	// var notExpected string
-// 	for i := 0; i < cnt; i++ {
-// 		l := strconv.Itoa(i) + ","
-// 		wg.Add(1)
-// 		go func() {
-// 			defer wg.Done()
-// 			tl.Log(l)
-// 		}()
-// 	}
-// 	wg.Wait()
-// 	// fmt.Println(notExpected)
-// 	// tlog.Print(t)
-// 	tl.Println(time.Since(s))
-// }
-
-// func TestTryToPanic3(t *testing.T) {
-// 	t.SkipNow()
-// 	t.Parallel()
-// 	s := time.Now()
-// 	cnt := 50000
-
-// 	tl := tlog.New(t)
-
-// 	var wg sync.WaitGroup
-// 	// var notExpected string
-// 	for i := 0; i < cnt; i++ {
-// 		l := strconv.Itoa(i) + ","
-// 		wg.Add(1)
-// 		go func() {
-// 			defer wg.Done()
-// 			tl.Log(l)
-// 		}()
-// 	}
-// 	wg.Wait()
-// 	// fmt.Println(notExpected)
-// 	// tlog.Println(t)
-// 	tl.Println(time.Since(s))
-// }
+func TestConcurrencySafety(t *testing.T) {
+	tl := setupTestcase(t)
+	// tl := setupTestcaseStdout(t)
+	cnt := 100000
+	var wg sync.WaitGroup
+	for i := 0; i < cnt; i++ {
+		l := strconv.Itoa(i) + ","
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			tl.Log(l)
+		}()
+	}
+	wg.Wait()
+}
