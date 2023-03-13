@@ -1,9 +1,6 @@
 package tlog_test
 
 import (
-	// "bytes"
-	// "fmt"
-
 	"errors"
 	"flag"
 	"fmt"
@@ -74,7 +71,7 @@ func setupTestcase(t *testing.T) *tlog.Logger {
 	t.Helper()
 	filename := getOutputFilename()
 
-	f, err := os.OpenFile(filename, os.O_WRONLY, 0750)
+	f, err := os.OpenFile(filename, os.O_APPEND|os.O_WRONLY, 0750)
 	if err != nil {
 		t.Fatalf("unable to open file '%v'\n", filename)
 	}

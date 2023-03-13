@@ -1,3 +1,9 @@
-2023-03-12 20:20:00 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:107 [TestFailMultiMix]: "one"
-2023-03-12 20:20:00 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:108 [TestFailMultiMix]: "one" "two"
-2023-03-12 20:20:00 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:109 [TestFailMultiMix]: 	one,two,three
+2023-03-13 21:13:40 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:95 [TestFailOne]: one
+2023-03-13 21:13:40 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:101 [TestFailMulti]: one
+2023-03-13 21:13:40 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:102 [TestFailMulti]: one,two
+2023-03-13 21:13:40 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:103 [TestFailMulti]: 	one,two,three
+2023-03-13 21:13:40 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:109 [TestFailMultiMix]: "one"
+2023-03-13 21:13:40 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:110 [TestFailMultiMix]: "one" "two"
+2023-03-13 21:13:40 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:111 [TestFailMultiMix]: 	one,two,three
+2023-03-13 21:13:40 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:117 [TestPanic]: "panic at testco"
+2023-03-13 21:13:40 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:130 [TestFailedTestcase]: "this testcase is a failure"
