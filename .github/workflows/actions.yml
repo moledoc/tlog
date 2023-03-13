@@ -11,6 +11,6 @@ jobs:
         uses: actions/setup-go@v3
         with:
           go-version: 1.19
-      # - name: go test
-      #   run: |
-      #     go test -v -cpu=4 -race -count=1
+      - name: go test
+        run: |
+          ! go test -v -cpu=4 -race -count=1 && go run results_compare/results_compare.go
