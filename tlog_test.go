@@ -9,14 +9,14 @@ import (
 	"fmt"
 	"io/fs"
 	"os"
+	"strconv"
+	"sync"
 	"testing"
 
 	"github.com/moledoc/tlog"
 )
 
-// TODO: test panic
-// TODO: test fail
-// TODO: concurrency
+// NOTE: tests for this package should be run sequentially, since expected test results should be in deterministic order.
 
 var (
 	record                      bool

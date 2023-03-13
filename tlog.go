@@ -60,7 +60,8 @@ type Logger struct {
 	writesTo     io.Writer
 	logs         []*Entry
 	mu           sync.RWMutex
-	cleanupFuncs []func()
+	cleanupFuncs []func() // run defined funcs after logs are outputted.
+	testPaniced  bool     // in case recover was called and this value flipped, we can still output the logs.
 }
 
 // lnFormat creates a format string with `count` number of values.
@@ -81,7 +82,7 @@ func createLogger(t *testing.T, wt io.Writer) *Logger {
 	t.Helper()
 	sl := &Logger{writesTo: wt, t: t}
 	t.Cleanup(func() {
-		if recover() == nil || t.Failed() {
+		if recover() != nil || t.Failed() || sl.testPaniced {
 			sl.print()
 		}
 		for _, fn := range sl.cleanupFuncs {
@@ -182,4 +183,14 @@ func (sl *Logger) PrintlnTo(wt io.Writer, format string, args ...any) (int, erro
 // GetLogEntries returns list of log entries recorded in the logger.
 func (sl *Logger) GetLogEntries() []*Entry {
 	return sl.logs
+}
+
+// SetPanic marks the corresponding test as paniced.
+// When test handles the panic (ie recovers), then when SetPanic is called inside the recover,
+// the logger is still able to output the logs.
+// Logs are not outputted when SetPanic is not called when recovering from the panic.
+func (sl *Logger) SetPanic() {
+	sl.mu.Lock()
+	defer sl.mu.Unlock()
+	sl.testPaniced = true
 }
