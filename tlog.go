@@ -178,7 +178,7 @@ func (sl *Logger) Println(args ...any) (int, error) {
 
 // PrintlnTo formats its arguments according to the format, similarly to Println, creates a log entry and outputs it to io.Writer specified in the arguments.
 // It returns the number of bytes written and any write error.
-func (sl *Logger) PrintlnTo(wt io.Writer, format string, args ...any) (int, error) {
+func (sl *Logger) PrintlnTo(wt io.Writer, args ...any) (int, error) {
 	sl.t.Helper()
 	return sl.PrintfTo(wt, lnFormat(len(args)), args...)
 }
