@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"io/fs"
 	"os"
-	"strconv"
 	"sync"
 	"testing"
 
@@ -67,7 +66,7 @@ func getOutputFilename() string {
 	return filename
 }
 
-func setupTestcase(t *testing.T) *tlog.Logger {
+func setupTestcase(t *testing.T) (*tlog.Logger, *os.File) {
 	t.Helper()
 	filename := getOutputFilename()
 
@@ -78,7 +77,7 @@ func setupTestcase(t *testing.T) *tlog.Logger {
 
 	tl := tlog.NewWithWriter(t, f)
 	tl.AddCleanupFunc(func() { fmt.Printf("Closed file '%v' with err '%v'\n", f.Name(), f.Close()) })
-	return tl
+	return tl, f
 }
 
 func setupTestcaseStdout(t *testing.T) *tlog.Logger {
@@ -86,34 +85,95 @@ func setupTestcaseStdout(t *testing.T) *tlog.Logger {
 	return tlog.New(t)
 }
 
-func TestNoFail(t *testing.T) {
-	setupTestcase(t)
-}
-
-func TestFailOne(t *testing.T) {
-	tl := setupTestcase(t)
-	tl.Logf("%v", "one")
-	t.Fail()
-}
-
-func TestFailMulti(t *testing.T) {
-	tl := setupTestcase(t)
-	tl.Logf("%v", "one")
-	tl.Logf("%v,%v", "one", "two")
-	tl.Logf("\t%v,%v,%v", "one", "two", "three")
-	t.Fail()
-}
-
-func TestFailMultiMix(t *testing.T) {
-	tl := setupTestcase(t)
+// TestLogsNoFail shouldn't output anything, since test doesn't fail.
+func TestLogsNoFail(t *testing.T) {
+	tl, f := setupTestcase(t)
+	tl.Logf("one")
+	tl.Logf("\t%v\n", "one")
+	tl.Logf("%#v%T", "one", f)
 	tl.Log("one")
 	tl.Log("one", "two")
-	tl.Logf("\t%v,%v,%v", "one", "two", "three")
+}
+
+// TestLogs should output logged values, since test fails.
+func TestLogs(t *testing.T) {
+	tl, f := setupTestcase(t)
+	tl.Logf("one")
+	tl.Logf("\t%v\n", "one")
+	tl.Logf("\n%#v%T", "one", f)
+	tl.Log("one")
+	tl.Log("one", "two")
 	t.Fail()
 }
 
-func TestPanic(t *testing.T) {
-	tl := setupTestcase(t)
+// TestPrints should output logged values, regardless if the test fails
+func TestPrints(t *testing.T) {
+	tl, f := setupTestcase(t)
+	tl.Printf("one")
+	tl.Printf("two")
+	tl.Printf("%v\t\n%v", "one", "two")
+	tl.PrintfTo(f, "one")
+	tl.PrintfTo(f, "%v\t\n%v", "one", "two")
+
+	tl.Println("one")
+	tl.Println("two")
+	tl.Println("%v\t\n%v", "one", "two")
+	tl.PrintlnTo(f, "one")
+	tl.PrintlnTo(f, "one", "two")
+	tl.PrintlnTo(f, "%v\t\n%v", "one", "two")
+}
+
+// TestPrintsWithFail should output logged values, regardless if the test fails
+func TestPrintsWithFail(t *testing.T) {
+	tl, f := setupTestcase(t)
+	tl.Printf("one")
+	tl.Printf("two")
+	tl.Printf("%v\t\n%v", "one", "two")
+	tl.PrintfTo(f, "one")
+	tl.PrintfTo(f, "%v\t\n%v", "one", "two")
+
+	tl.Println("one")
+	tl.Println("two")
+	tl.Println("%v\t\n%v", "one", "two")
+	tl.PrintlnTo(f, "one")
+	tl.PrintlnTo(f, "one", "two")
+	tl.PrintlnTo(f, "%v\t\n%v", "one", "two")
+	t.Fail()
+}
+
+// TestPrintsReturnValues should output correct number of written bytes and errors.
+func TestPrintsReturnValues(t *testing.T) {
+	tl, f := setupTestcase(t)
+	var n int
+	var err error
+	n, err = tl.Printf("one")
+	tl.Println(n, err)
+	n, err = tl.Printf("two")
+	tl.Println(n, err)
+	n, err = tl.Printf("%v\t\n%v", "one", "two")
+	tl.Println(n, err)
+	n, err = tl.PrintfTo(f, "one")
+	tl.Println(n, err)
+	n, err = tl.PrintfTo(f, "%v\t\n%v", "one", "two")
+	tl.Println(n, err)
+
+	n, err = tl.Println("one")
+	tl.Println(n, err)
+	n, err = tl.Println("two")
+	tl.Println(n, err)
+	n, err = tl.Println("%v\t\n%v", "one", "two")
+	tl.Println(n, err)
+	n, err = tl.PrintlnTo(f, "one")
+	tl.Println(n, err)
+	n, err = tl.PrintlnTo(f, "one", "two")
+	tl.Println(n, err)
+	n, err = tl.PrintlnTo(f, "%v\t\n%v", "one", "two")
+	tl.Println(n, err)
+}
+
+// TestPanics should output logged values when the test panics when logger's SetPanic is called.
+func TestPanics(t *testing.T) {
+	tl, _ := setupTestcase(t)
 	tl.Log("panic at testco")
 	defer func() {
 		tl.SetPanic()
@@ -125,23 +185,70 @@ func TestPanic(t *testing.T) {
 	panic(1)
 }
 
-func TestFailedTestcase(t *testing.T) {
-	tl := setupTestcase(t)
-	tl.Log("this testcase is a failure")
-	t.FailNow()
+// TestPanicsSetPanicNotCalled shouldn't output logged values when the test panics when logger's SetPanic is not called.
+func TestPanicsSetPanicNotCalled(t *testing.T) {
+	tl, _ := setupTestcase(t)
+	tl.Log("panic at testco")
+	defer func() {
+		if r := recover(); r == nil {
+			t.Fatal("Expected panic, but nobody paniced")
+		}
+
+	}()
+	panic(1)
 }
 
+// TestPanicFromSubFunc should output values when the test panics in a sub func and logger's SetPanic is called.
+func TestPanicFromSubFunc(t *testing.T) {
+	tl, _ := setupTestcase(t)
+	tl.Log("panic at sub-testco")
+	func() {
+		defer func() {
+			tl.SetPanic()
+			if r := recover(); r == nil {
+				t.Fatal("Expected panic, but nobody paniced")
+			}
+
+		}()
+		var list []int
+		_ = list[100]
+	}()
+}
+
+// TestConcurrencySafety shouldn't output logged values, since there shouldn't be any data races nor invalid concurrenct object accesses.
 func TestConcurrencySafety(t *testing.T) {
-	tl := setupTestcase(t)
-	// tl := setupTestcaseStdout(t)
+	// tl, _ := setupTestcase(t)
+	tl := setupTestcaseStdout(t)
 	cnt := 100000
 	var wg sync.WaitGroup
 	for i := 0; i < cnt; i++ {
-		l := strconv.Itoa(i) + ","
+		wg.Add(1)
+		go func(i int) {
+			defer wg.Done()
+			tl.Log(i)
+		}(i)
+	}
+	wg.Wait()
+}
+
+// TestRaceConditionDuringTest should output logged values, since there's race condition in the test itself, ie range variable is captured by the func literal.
+func TestRaceConditionDuringTest(t *testing.T) {
+	tl, _ := setupTestcase(t)
+	// tl := setupTestcaseStdout(t)
+	defer func() {
+		tl.SetPanic()
+		if r := recover(); r == nil {
+			t.Fatal("Expected panic, but nobody paniced")
+		}
+
+	}()
+	cnt := 10
+	var wg sync.WaitGroup
+	for i := 0; i < cnt; i++ {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			tl.Log(l)
+			tl.Log(0 / i) // NOTE: divide 0 with i, so we would have deterministic value in the output.
 		}()
 	}
 	wg.Wait()
