@@ -21,10 +21,11 @@ import (
 
 // Entry contains fields to construct a log entry.
 type Entry struct {
-	Time     time.Time // Timestamp when the log entry was made.
-	Location string    // Location (<filepath>:<row number>) where the log entry was made. Eg /foo/bar/baz:54.
-	Name     string    // Test's name, ie testing.T.Name().
-	Message  string    // Log message.
+	Time time.Time // Timestamp when the log entry was made.
+	// TODO: think about shortening the filepath, since absolute path fails in the gh actions (and the full path might not be needed anyway)
+	Location string // Location (<filepath>:<row number>) where the log entry was made. Eg /foo/bar/baz:54.
+	Name     string // Test's name, ie testing.T.Name().
+	Message  string // Log message.
 }
 
 // String returns log entry as a log string.
@@ -44,10 +45,15 @@ func makeEntry(t *testing.T, format string, args ...any) *Entry {
 	t.Helper()
 	msg := fmt.Sprintf(format, args...)
 	var location string
+	var basepath string
 	for i := 0; ; i++ {
-		_, file, line, ok := runtime.Caller(i)
+		_, fpath, line, ok := runtime.Caller(i)
+		if i == 0 { // IMPROVEME:
+			basepath = strings.Replace(fpath, "tlog/tlog.go", "", 1)
+		}
 		// MAYBE: think about how to handle !ok better
-		if !ok || !strings.Contains(file, "tlog.go") {
+		if !ok || !strings.Contains(fpath, "tlog.go") {
+			file := strings.Replace(fpath, basepath, "", 1)
 			location = fmt.Sprintf("%v:%v", file, line)
 			break
 		}
@@ -149,13 +155,27 @@ func (sl *Logger) Logf(format string, args ...any) {
 
 // Log formats its arguments in a default format, similarly to fmt.Println and records the text in a new log entry.
 // The entry is only outputted when the test fails or panics.
-// NOTE: Using *Logger.Log outputs the provided message/objects as Go objects.
+// Using *Logger.Log outputs the provided message/objects as Go objects.
 // This is done so that struct fields are typed in the log.
 // However, this also means that strings are logged as string literals.
 func (sl *Logger) Log(args ...any) {
 	sl.t.Helper()
 	sl.Logf(lnFormat(len(args)), args...)
 }
+
+// LogfFromLast formats its arguments according to the format, similarly to fmt.Printf, and records the text in a new log entry.
+// A final newline is added if not provided.
+// The entry is only outputted when the test fails or panics.
+// In addition to provided arguments, the time difference since last log entry is calculated and outputted.
+// func (sl *Logger) LogfFromLast(format string, args ...any) {}
+
+// LogFromLast formats its arguments in a default format, similarly to fmt.Println and records the text in a new log entry.
+// The entry is only outputted when the test fails or panics.
+// Using *Logger.Log outputs the provided message/objects as Go objects.
+// This is done so that struct fields are typed in the log.
+// However, this also means that strings are logged as string literals.
+// In addition to provided arguments, the time difference since last log entry is calculated and outputted.
+// func (sl *Logger) LogFromLast(args ...any) {}
 
 // Printf formats its arguments according to the format, similarly to Printf, creates a log entry and outputs it to io.Writer specified in the logger.
 // It returns the number of bytes written and any write error.
@@ -178,7 +198,7 @@ func (sl *Logger) PrintfTo(wt io.Writer, format string, args ...any) (int, error
 
 // Println formats its arguments according to the format, similarly to Println, creates a log entry and outputs it to io.Writer specified in the logger.
 // It returns the number of bytes written and any write error.
-// NOTE: Using *Logger.Println outputs the provided message/objects as Go objects.
+// Using *Logger.Println outputs the provided message/objects as Go objects.
 // This is done so that struct fields are typed in the log.
 // However, this also means that strings are logged as string literals.
 func (sl *Logger) Println(args ...any) (int, error) {
@@ -190,7 +210,7 @@ func (sl *Logger) Println(args ...any) (int, error) {
 
 // PrintlnTo formats its arguments according to the format, similarly to Println, creates a log entry and outputs it to io.Writer specified in the arguments.
 // It returns the number of bytes written and any write error.
-// NOTE: Using *Logger.Println outputs the provided message/objects as Go objects.
+// Using *Logger.Println outputs the provided message/objects as Go objects.
 // This is done so that struct fields are typed in the log.
 // However, this also means that strings are logged as string literals.
 func (sl *Logger) PrintlnTo(wt io.Writer, args ...any) (int, error) {

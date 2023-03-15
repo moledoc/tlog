@@ -45,6 +45,8 @@ func TestXxx(t *testing.T) {
 }
 ```
 
+<!-- TODO: continue -->
+
 ## TODOs
 
 * add support for `testing.B` (and other types)

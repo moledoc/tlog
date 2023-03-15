@@ -1,159 +1,159 @@
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:119 [TestLogs]: one
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:120 [TestLogs]: 	one
+2023-03-15 22:06:05 tlog/tlog_test.go:119 [TestLogs]: one
+2023-03-15 22:06:05 tlog/tlog_test.go:120 [TestLogs]: 	one
 
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:121 [TestLogs]: 
+2023-03-15 22:06:05 tlog/tlog_test.go:121 [TestLogs]: 
 "one"*os.File
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:122 [TestLogs]: "one"
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:123 [TestLogs]: "one" "two"
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:130 [TestPrints]: one
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:131 [TestPrints]: two
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:132 [TestPrints]: one	
+2023-03-15 22:06:05 tlog/tlog_test.go:122 [TestLogs]: "one"
+2023-03-15 22:06:05 tlog/tlog_test.go:123 [TestLogs]: "one" "two"
+2023-03-15 22:06:05 tlog/tlog_test.go:130 [TestPrints]: one
+2023-03-15 22:06:05 tlog/tlog_test.go:131 [TestPrints]: two
+2023-03-15 22:06:05 tlog/tlog_test.go:132 [TestPrints]: one	
 two
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:133 [TestPrints]: one
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:134 [TestPrints]: one	
+2023-03-15 22:06:05 tlog/tlog_test.go:133 [TestPrints]: one
+2023-03-15 22:06:05 tlog/tlog_test.go:134 [TestPrints]: one	
 two
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:136 [TestPrints]: "one"
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:137 [TestPrints]: "two"
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:138 [TestPrints]: "%v\t\n%v" "one" "two"
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:139 [TestPrints]: "one"
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:140 [TestPrints]: "one" "two"
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:141 [TestPrints]: "%v\t\n%v" "one" "two"
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:147 [TestPrintsWithFail]: one
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:148 [TestPrintsWithFail]: two
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:149 [TestPrintsWithFail]: one	
+2023-03-15 22:06:05 tlog/tlog_test.go:136 [TestPrints]: "one"
+2023-03-15 22:06:05 tlog/tlog_test.go:137 [TestPrints]: "two"
+2023-03-15 22:06:05 tlog/tlog_test.go:138 [TestPrints]: "%v\t\n%v" "one" "two"
+2023-03-15 22:06:05 tlog/tlog_test.go:139 [TestPrints]: "one"
+2023-03-15 22:06:05 tlog/tlog_test.go:140 [TestPrints]: "one" "two"
+2023-03-15 22:06:05 tlog/tlog_test.go:141 [TestPrints]: "%v\t\n%v" "one" "two"
+2023-03-15 22:06:05 tlog/tlog_test.go:147 [TestPrintsWithFail]: one
+2023-03-15 22:06:05 tlog/tlog_test.go:148 [TestPrintsWithFail]: two
+2023-03-15 22:06:05 tlog/tlog_test.go:149 [TestPrintsWithFail]: one	
 two
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:150 [TestPrintsWithFail]: one
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:151 [TestPrintsWithFail]: one	
+2023-03-15 22:06:05 tlog/tlog_test.go:150 [TestPrintsWithFail]: one
+2023-03-15 22:06:05 tlog/tlog_test.go:151 [TestPrintsWithFail]: one	
 two
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:153 [TestPrintsWithFail]: "one"
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:154 [TestPrintsWithFail]: "two"
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:155 [TestPrintsWithFail]: "%v\t\n%v" "one" "two"
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:156 [TestPrintsWithFail]: "one"
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:157 [TestPrintsWithFail]: "one" "two"
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:158 [TestPrintsWithFail]: "%v\t\n%v" "one" "two"
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:167 [TestPrintsReturnValues]: one
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:168 [TestPrintsReturnValues]: 108 <nil>
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:169 [TestPrintsReturnValues]: two
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:170 [TestPrintsReturnValues]: 108 <nil>
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:171 [TestPrintsReturnValues]: one	
+2023-03-15 22:06:05 tlog/tlog_test.go:153 [TestPrintsWithFail]: "one"
+2023-03-15 22:06:05 tlog/tlog_test.go:154 [TestPrintsWithFail]: "two"
+2023-03-15 22:06:05 tlog/tlog_test.go:155 [TestPrintsWithFail]: "%v\t\n%v" "one" "two"
+2023-03-15 22:06:05 tlog/tlog_test.go:156 [TestPrintsWithFail]: "one"
+2023-03-15 22:06:05 tlog/tlog_test.go:157 [TestPrintsWithFail]: "one" "two"
+2023-03-15 22:06:05 tlog/tlog_test.go:158 [TestPrintsWithFail]: "%v\t\n%v" "one" "two"
+2023-03-15 22:06:05 tlog/tlog_test.go:167 [TestPrintsReturnValues]: one
+2023-03-15 22:06:05 tlog/tlog_test.go:168 [TestPrintsReturnValues]: 72 <nil>
+2023-03-15 22:06:05 tlog/tlog_test.go:169 [TestPrintsReturnValues]: two
+2023-03-15 22:06:05 tlog/tlog_test.go:170 [TestPrintsReturnValues]: 72 <nil>
+2023-03-15 22:06:05 tlog/tlog_test.go:171 [TestPrintsReturnValues]: one	
 two
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:172 [TestPrintsReturnValues]: 113 <nil>
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:173 [TestPrintsReturnValues]: one
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:174 [TestPrintsReturnValues]: 108 <nil>
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:175 [TestPrintsReturnValues]: one	
+2023-03-15 22:06:05 tlog/tlog_test.go:172 [TestPrintsReturnValues]: 77 <nil>
+2023-03-15 22:06:05 tlog/tlog_test.go:173 [TestPrintsReturnValues]: one
+2023-03-15 22:06:05 tlog/tlog_test.go:174 [TestPrintsReturnValues]: 72 <nil>
+2023-03-15 22:06:05 tlog/tlog_test.go:175 [TestPrintsReturnValues]: one	
 two
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:176 [TestPrintsReturnValues]: 113 <nil>
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:178 [TestPrintsReturnValues]: "one"
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:179 [TestPrintsReturnValues]: 110 <nil>
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:180 [TestPrintsReturnValues]: "two"
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:181 [TestPrintsReturnValues]: 110 <nil>
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:182 [TestPrintsReturnValues]: "%v\t\n%v" "one" "two"
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:183 [TestPrintsReturnValues]: 127 <nil>
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:184 [TestPrintsReturnValues]: "one"
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:185 [TestPrintsReturnValues]: 110 <nil>
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:186 [TestPrintsReturnValues]: "one" "two"
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:187 [TestPrintsReturnValues]: 116 <nil>
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:188 [TestPrintsReturnValues]: "%v\t\n%v" "one" "two"
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:189 [TestPrintsReturnValues]: 127 <nil>
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:195 [TestPanics]: "panic at testco"
-2023-03-15 20:14:11 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:222 [TestPanicFromSubFunc]: "panic at sub-testco"
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
-2023-03-15 20:14:14 /home/utt/go/src/github.com/moledoc/tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:05 tlog/tlog_test.go:176 [TestPrintsReturnValues]: 77 <nil>
+2023-03-15 22:06:05 tlog/tlog_test.go:178 [TestPrintsReturnValues]: "one"
+2023-03-15 22:06:05 tlog/tlog_test.go:179 [TestPrintsReturnValues]: 74 <nil>
+2023-03-15 22:06:05 tlog/tlog_test.go:180 [TestPrintsReturnValues]: "two"
+2023-03-15 22:06:05 tlog/tlog_test.go:181 [TestPrintsReturnValues]: 74 <nil>
+2023-03-15 22:06:05 tlog/tlog_test.go:182 [TestPrintsReturnValues]: "%v\t\n%v" "one" "two"
+2023-03-15 22:06:05 tlog/tlog_test.go:183 [TestPrintsReturnValues]: 91 <nil>
+2023-03-15 22:06:05 tlog/tlog_test.go:184 [TestPrintsReturnValues]: "one"
+2023-03-15 22:06:05 tlog/tlog_test.go:185 [TestPrintsReturnValues]: 74 <nil>
+2023-03-15 22:06:05 tlog/tlog_test.go:186 [TestPrintsReturnValues]: "one" "two"
+2023-03-15 22:06:05 tlog/tlog_test.go:187 [TestPrintsReturnValues]: 80 <nil>
+2023-03-15 22:06:05 tlog/tlog_test.go:188 [TestPrintsReturnValues]: "%v\t\n%v" "one" "two"
+2023-03-15 22:06:05 tlog/tlog_test.go:189 [TestPrintsReturnValues]: 91 <nil>
+2023-03-15 22:06:05 tlog/tlog_test.go:195 [TestPanics]: "panic at testco"
+2023-03-15 22:06:05 tlog/tlog_test.go:222 [TestPanicFromSubFunc]: "panic at sub-testco"
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
+2023-03-15 22:06:07 tlog/tlog_test.go:262 [TestRaceConditionDuringTest]: 0
