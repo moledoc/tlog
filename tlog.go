@@ -1,3 +1,11 @@
+// Copyright 2023 Meelis Utt. All rights reserved.
+// Use of this source code is governed by a MIT-style
+// license that can be found in the LICENSE file.
+
+// Package tlog provides logging tools to go along with the normal Go testing system.
+//
+// The core concept of this package is to enable getting logs for the failed or panicked tests,
+// while not outputting the logs from passing tests to keep the testing logs/output clean and relevant.
 package tlog
 
 import (
@@ -15,7 +23,7 @@ import (
 type Entry struct {
 	Time     time.Time // Timestamp when the log entry was made.
 	Location string    // Location (<filepath>:<row number>) where the log entry was made. Eg /foo/bar/baz:54.
-	Name     string    // Testcase name, ie testing.T.Name().
+	Name     string    // Test's name, ie testing.T.Name().
 	Message  string    // Log message.
 }
 
@@ -52,8 +60,8 @@ func makeEntry(t *testing.T, format string, args ...any) *Entry {
 	}
 }
 
-// Logger is an active logging object that stores log entries and outputs them to an io.Writer, when test fails or panics.
-// Logger can be used simultaneously from multiple goroutines; it guarantees to serialize log entries to an internal cache.
+// Logger is an active logging object that stores log entries and outputs them to an io.Writer when test fails or panics.
+// Logger can be used simultaneously from multiple goroutines, it guarantees to serialize log entries to an internal cache.
 type Logger struct {
 	// filtered and unexported fields
 	t            *testing.T
@@ -142,7 +150,8 @@ func (sl *Logger) Logf(format string, args ...any) {
 // Log formats its arguments in a default format, similarly to fmt.Println and records the text in a new log entry.
 // The entry is only outputted when the test fails or panics.
 // NOTE: Using *Logger.Log outputs the provided message/objects as Go objects.
-// This is done so that struct fields are typed in the log. However, this also means that strings are logged as string literals.
+// This is done so that struct fields are typed in the log.
+// However, this also means that strings are logged as string literals.
 func (sl *Logger) Log(args ...any) {
 	sl.t.Helper()
 	sl.Logf(lnFormat(len(args)), args...)
@@ -169,6 +178,9 @@ func (sl *Logger) PrintfTo(wt io.Writer, format string, args ...any) (int, error
 
 // Println formats its arguments according to the format, similarly to Println, creates a log entry and outputs it to io.Writer specified in the logger.
 // It returns the number of bytes written and any write error.
+// NOTE: Using *Logger.Println outputs the provided message/objects as Go objects.
+// This is done so that struct fields are typed in the log.
+// However, this also means that strings are logged as string literals.
 func (sl *Logger) Println(args ...any) (int, error) {
 	sl.t.Helper()
 	sl.mu.RLock()
@@ -178,6 +190,9 @@ func (sl *Logger) Println(args ...any) (int, error) {
 
 // PrintlnTo formats its arguments according to the format, similarly to Println, creates a log entry and outputs it to io.Writer specified in the arguments.
 // It returns the number of bytes written and any write error.
+// NOTE: Using *Logger.Println outputs the provided message/objects as Go objects.
+// This is done so that struct fields are typed in the log.
+// However, this also means that strings are logged as string literals.
 func (sl *Logger) PrintlnTo(wt io.Writer, args ...any) (int, error) {
 	sl.t.Helper()
 	return sl.PrintfTo(wt, lnFormat(len(args)), args...)
