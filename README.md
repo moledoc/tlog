@@ -34,18 +34,43 @@ func TestXxx(t *testing.T) {
 }
 
 func TestXxx(t *testing.T) {
-    var bs []byte
-    buf := bytes.NewBuffer(bs)
-    tl := tlog.NewWithWriter(t, buf) // outputs to bytes.Buffer
+    f, _ := os.Open("filename")
+    tl = tlog.NewWithWriter(t, f) // outptus to opened file
+    tl.AddCleanupFunc(func() { f.Close() }) // close opened file
+    // ... 
 }
 
 func TestXxx(t *testing.T) {
-    f, _ := os.Open("filename")
-    tl = tlog.NewWithWriter(t, f) // outptus to opened file
+buf := bytes.NewBuffer([]byte{})
+	tl := tlog.NewWithWriter(t, buf) // outputs to bytes.Buffer
+	tl.AddCleanupFunc(func() { // post processing the entries
+		fmt.Println(buf.String())
+		var timestamps []time.Time
+		re := regexp.MustCompile("[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}")
+		lines := strings.Split(buf.String(), "\n")
+		for _, line := range lines {
+			tsStr := re.FindStringSubmatch(line)
+			if len(tsStr) == 0 {
+				continue
+			}
+			ts, _ := time.Parse("2006-01-02 15:04:05", tsStr[0])
+			timestamps = append(timestamps, ts)
+		}
+		var timeDiffs []time.Duration
+		for i := 1; i < len(timestamps); i++ {
+			timeDiffs = append(timeDiffs, timestamps[i].Sub(timestamps[i-1]))
+		}
+		fmt.Println("Time differences between log calls:", timeDiffs)
+	})
+    tl.Log("hey")
+	time.Sleep(100 * time.Millisecond)
+	tl.Log("you")
+    // ...
+	t.FailNow()
 }
 ```
 
-<!-- TODO: continue -->
+For some other examples, feel free to look at the `tlog_test.go` file.
 
 ## TODOs
 
