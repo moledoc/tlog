@@ -32,7 +32,7 @@ type Entry struct {
 func (l *Entry) String() string {
 	return fmt.Sprintf(
 		"%v %v %v %v\n",
-		l.Time.UTC().Format("2006-01-02 15:04:05"),
+		l.Time.UTC().Format("2006-01-02 15:04:05.000"),
 		l.Location,
 		fmt.Sprintf("[%v]:", l.Name),
 		l.Message,

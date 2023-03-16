@@ -29,7 +29,7 @@ func main() {
 	}
 
 	// NOTE: remove timestamps, because those are not comparable
-	re := regexp.MustCompile("[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2} ")
+	re := regexp.MustCompile("[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3} ")
 	expectedResultLines := re.Split(string(expectedResultBytes), -1)
 	actualResultLines := re.Split(string(actualResultBytes), -1)
 
