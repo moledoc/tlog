@@ -13,4 +13,4 @@ jobs:
           go-version: 1.19
       - name: go test
         run: |
-          ! go test -v -cpu=4 -race -count=1 && go run results_compare/results_compare.go
+          ! GORACE="exitcode=1" go test -v -cpu=1 -race -count=1 -shuffle=off ./... && go run results_compare/results_compare.go
