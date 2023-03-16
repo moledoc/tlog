@@ -40,7 +40,7 @@ var (
 )
 
 func truncateFile(filename string) {
-	f, err := os.OpenFile(filename, os.O_TRUNC, 0750)
+	f, err := os.OpenFile(filename, os.O_TRUNC|os.O_CREATE, 0750)
 	if err != nil {
 		fmt.Printf("[WARNING]: Failed to truncate file '%v': %v\n", filename, err)
 		f, err = os.OpenFile(filename, os.O_CREATE, 0750)
@@ -252,7 +252,6 @@ func TestConcurrencySafety(t *testing.T) {
 // TestRaceConditionDuringTest should output logged values, since there's race condition in the test itself, ie range variable is captured by the func literal.
 func TestRaceConditionDuringTest(t *testing.T) {
 	tl, _ := setupTestcase(t)
-	// tl := setupTestcaseStdout(t)
 	cnt := 100
 	var wg sync.WaitGroup
 	for i := 0; i < cnt; i++ {
@@ -263,4 +262,5 @@ func TestRaceConditionDuringTest(t *testing.T) {
 		}()
 	}
 	wg.Wait()
+	t.FailNow()
 }

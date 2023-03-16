@@ -21,11 +21,10 @@ import (
 
 // Entry contains fields to construct a log entry.
 type Entry struct {
-	Time time.Time // Timestamp when the log entry was made.
-	// TODO: think about shortening the filepath, since absolute path fails in the gh actions (and the full path might not be needed anyway)
-	Location string // Location (<filepath>:<row number>) where the log entry was made. Eg /foo/bar/baz:54.
-	Name     string // Test's name, ie testing.T.Name().
-	Message  string // Log message.
+	Time     time.Time // Timestamp when the log entry was made.
+	Location string    // Location (<filepath>:<row number>) where the log entry was made. Eg /foo/bar/baz:54.
+	Name     string    // Test's name, ie testing.T.Name().
+	Message  string    // Log message.
 }
 
 // String returns log entry as a log string.
@@ -162,20 +161,6 @@ func (sl *Logger) Log(args ...any) {
 	sl.t.Helper()
 	sl.Logf(lnFormat(len(args)), args...)
 }
-
-// LogfFromLast formats its arguments according to the format, similarly to fmt.Printf, and records the text in a new log entry.
-// A final newline is added if not provided.
-// The entry is only outputted when the test fails or panics.
-// In addition to provided arguments, the time difference since last log entry is calculated and outputted.
-// func (sl *Logger) LogfFromLast(format string, args ...any) {}
-
-// LogFromLast formats its arguments in a default format, similarly to fmt.Println and records the text in a new log entry.
-// The entry is only outputted when the test fails or panics.
-// Using *Logger.Log outputs the provided message/objects as Go objects.
-// This is done so that struct fields are typed in the log.
-// However, this also means that strings are logged as string literals.
-// In addition to provided arguments, the time difference since last log entry is calculated and outputted.
-// func (sl *Logger) LogFromLast(args ...any) {}
 
 // Printf formats its arguments according to the format, similarly to Printf, creates a log entry and outputs it to io.Writer specified in the logger.
 // It returns the number of bytes written and any write error.
