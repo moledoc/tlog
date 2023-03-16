@@ -1,3 +1,23 @@
+// Copyright 2023 Meelis Utt. All rights reserved.
+// Use of this source code is governed by a MIT-style
+// license that can be found in the LICENSE file.
+
+// tlog_test provides testing for the tlog package.
+//
+// It's hard to test this packages with normal asserts,
+// because test needs to fails to get the logs.
+// Because of this reason the following approach to testing is used instead:
+// * make a snapshot of current tlog behavior in the tests, verify that and store it in test_results/expected.log;
+// * running the tests normally will store the output to test_results/actual.log
+// * expected.log and actual.log file contents are compared;
+// * if there are no deviations, then the package works as before.
+// If there are new features and tests added,
+// then we can make a new snapshot of expected behavior
+// by using the -record flag when running the tests.
+// NOTE: The tests for this package need be run sequentially,
+// since expected test results should be in deterministic order.
+// However, this doesn't mean that tlog package can't be used in
+// conjunction with t.Parallel()
 package tlog_test
 
 import (
@@ -12,8 +32,6 @@ import (
 	"github.com/moledoc/tlog"
 )
 
-// NOTE: tests for this package should be run sequentially, since expected test results should be in deterministic order.
-
 var (
 	record                      bool
 	testResultsDir              string = "test_results"
@@ -22,7 +40,7 @@ var (
 )
 
 func truncateFile(filename string) {
-	f, err := os.OpenFile(filename, os.O_TRUNC, 0750)
+	f, err := os.OpenFile(filename, os.O_TRUNC|os.O_CREATE, 0750)
 	if err != nil {
 		fmt.Printf("[WARNING]: Failed to truncate file '%v': %v\n", filename, err)
 		f, err = os.OpenFile(filename, os.O_CREATE, 0750)
@@ -234,7 +252,6 @@ func TestConcurrencySafety(t *testing.T) {
 // TestRaceConditionDuringTest should output logged values, since there's race condition in the test itself, ie range variable is captured by the func literal.
 func TestRaceConditionDuringTest(t *testing.T) {
 	tl, _ := setupTestcase(t)
-	// tl := setupTestcaseStdout(t)
 	cnt := 100
 	var wg sync.WaitGroup
 	for i := 0; i < cnt; i++ {
@@ -245,4 +262,5 @@ func TestRaceConditionDuringTest(t *testing.T) {
 		}()
 	}
 	wg.Wait()
+	t.FailNow()
 }
