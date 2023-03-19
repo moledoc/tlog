@@ -41,9 +41,23 @@ func TestXxx(t *testing.T) {
 }
 
 func TestXxx(t *testing.T) {
-buf := bytes.NewBuffer([]byte{})
+	tl := tlog.New(t) // outputs to os.Stdout
+	tl.Log("hey")
+	time.Sleep(100 * time.Millisecond)
+	tl.Log("you")
+	entries := tl.GetLogEntries() // get log entries for processing: calculate time between entries
+	var timeDiffs []time.Duration
+	for i := 1; i < len(entries); i++ {
+		timeDiffs = append(timeDiffs, entries[i].Time.Sub(entries[i-1].Time))
+	}
+	fmt.Println("Time differences between log calls:", timeDiffs)
+	// ...
+}
+
+func TestXxx(t *testing.T) {
+	buf := bytes.NewBuffer([]byte{})
 	tl := tlog.NewWithWriter(t, buf) // outputs to bytes.Buffer
-	tl.AddCleanupFunc(func() { // post processing the entries
+	tl.AddCleanupFunc(func() { // post processing the entries: calculate time between entries
 		fmt.Println(buf.String())
 		var timestamps []time.Time
 		re := regexp.MustCompile("[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}")
@@ -62,11 +76,10 @@ buf := bytes.NewBuffer([]byte{})
 		}
 		fmt.Println("Time differences between log calls:", timeDiffs)
 	})
-    tl.Log("hey")
+	tl.Log("hey")
 	time.Sleep(100 * time.Millisecond)
 	tl.Log("you")
-    // ...
-	t.FailNow()
+	// ...
 }
 ```
 
