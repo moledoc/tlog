@@ -16,7 +16,7 @@ import (
 	"github.com/moledoc/tlog"
 )
 
-func Add(a int, b int) int {
+func add(a int, b int) int {
 	return a + b
 }
 
@@ -62,6 +62,6 @@ func TestNestedFilepath(t *testing.T) {
 	tl, _ := setupTestcase(t)
 	a := 34
 	b := 35
-	tl.Logf("Add(%v,%v)=%v", a, b, Add(a, b))
+	tl.Logf("Add(%v,%v)=%v", a, b, add(a, b))
 	t.FailNow()
 }

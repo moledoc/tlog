@@ -24,12 +24,14 @@ In addition to mentioned, some extra methods are defined to
 ## Usage
 
 In each test it's expected to create a new `Logger` object, using the `New(*testing.T)` or `NewWithWriter(*testing.T, io.Writer)` function.
+That logger object can then be used to make log entries to be shown when the test fails/panics (or other actions mentioned above).
 
 Few examples.
 
 ```go
 func TestXxx(t *testing.T) {
     tl := tlog.New(t) // outputs logs to os.Stdout
+	tl.Log("Hello world")
     // ....
 }
 
@@ -37,27 +39,29 @@ func TestXxx(t *testing.T) {
     f, _ := os.Open("filename")
     tl = tlog.NewWithWriter(t, f) // outptus to opened file
     tl.AddCleanupFunc(func() { f.Close() }) // close opened file
+	tl.Logf("\t%v\n","Hello world")
     // ... 
 }
 
+
 func TestXxx(t *testing.T) {
 	tl := tlog.New(t) // outputs to os.Stdout
-	tl.Log("hey")
+	tl.Log("Hello")
 	time.Sleep(100 * time.Millisecond)
-	tl.Log("you")
+	tl.Log("world")
 	entries := tl.GetLogEntries() // get log entries for processing: calculate time between entries
 	var timeDiffs []time.Duration
 	for i := 1; i < len(entries); i++ {
 		timeDiffs = append(timeDiffs, entries[i].Time.Sub(entries[i-1].Time))
 	}
-	fmt.Println("Time differences between log calls:", timeDiffs)
+	tl.Println("Time differences between log calls:", timeDiffs)
 	// ...
 }
 
 func TestXxx(t *testing.T) {
 	buf := bytes.NewBuffer([]byte{})
 	tl := tlog.NewWithWriter(t, buf) // outputs to bytes.Buffer
-	tl.AddCleanupFunc(func() { // post processing the entries: calculate time between entries
+	tl.AddCleanupFunc(func() {       // post processing the entries from buffer: calculate time between entries
 		fmt.Println(buf.String())
 		var timestamps []time.Time
 		re := regexp.MustCompile("[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}")
@@ -76,14 +80,15 @@ func TestXxx(t *testing.T) {
 		}
 		fmt.Println("Time differences between log calls:", timeDiffs)
 	})
-	tl.Log("hey")
+	tl.Log("Hello")
 	time.Sleep(100 * time.Millisecond)
-	tl.Log("you")
+	tl.Log("world")
 	// ...
+	t.FailNow()
 }
 ```
 
-For some other examples, feel free to look at the `tlog_test.go` file.
+For other examples, see `tlog_test.go` file.
 
 ## TODOs
 
