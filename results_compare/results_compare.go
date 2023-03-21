@@ -33,7 +33,7 @@ func main() {
 	}
 
 	// NOTE: remove timestamps, because those are not comparable
-	re := regexp.MustCompile("[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3} ")
+	re := regexp.MustCompile("[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3} .*/[^:0-9{1-3}]")
 	expectedResultLines := re.Split(string(expectedResultBytes), -1)
 	actualResultLines := re.Split(string(actualResultBytes), -1)
 
@@ -93,7 +93,7 @@ func main() {
 	// NOTE: Make result more clearly visible/separated
 	fmt.Println("\n------------------------------------------------------")
 	if !passed {
-		fmt.Println("[FAILURE]: Actual test results didn't matched the expected ones")
+		fmt.Println("[FAILURE]: Actual test results didn't match the expected ones")
 		os.Exit(1)
 	}
 
