@@ -44,16 +44,11 @@ func makeEntry(t *testing.T, format string, args ...any) *Entry {
 	t.Helper()
 	msg := fmt.Sprintf(format, args...)
 	var location string
-	var basepath string
 	for i := 0; ; i++ {
 		_, fpath, line, ok := runtime.Caller(i)
-		if i == 0 { // IMPROVEME:
-			basepath = strings.Replace(fpath, "tlog/tlog.go", "", 1)
-		}
 		// MAYBE: think about how to handle !ok better
 		if !ok || !strings.Contains(fpath, "tlog.go") {
-			file := strings.Replace(fpath, basepath, "", 1)
-			location = fmt.Sprintf("%v:%v", file, line)
+			location = fmt.Sprintf("%v:%v", fpath, line)
 			break
 		}
 	}
