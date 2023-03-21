@@ -90,10 +90,6 @@ func TestXxx(t *testing.T) {
 
 For other examples, see `tlog_test.go` file.
 
-## TODOs
-
-* add support for `testing.B` (and other types)
-
 ## Author
 
 Meelis Utt
